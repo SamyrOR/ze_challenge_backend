@@ -7,6 +7,14 @@ defmodule ZeChallengeBackendWeb.Router do
 
   scope "/api", ZeChallengeBackendWeb do
     pipe_through :api
+
+    scope "/partner" do
+      get "/", PartnerController, :all
+      post "/", PartnerController, :create
+      get "/:id", PartnerController, :get
+      put "/:id", PartnerController, :update
+      delete "/:id", PartnerController, :delete
+    end
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

@@ -1,4 +1,4 @@
-defmodule ZeChallengeBackend.Partner do
+defmodule ZeChallengeBackend.Core.Partner do
   use Ecto.Schema
   import Ecto.Changeset
 
