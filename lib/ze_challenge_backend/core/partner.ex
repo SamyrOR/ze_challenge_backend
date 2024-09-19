@@ -3,7 +3,7 @@ defmodule ZeChallengeBackend.Core.Partner do
   import Ecto.Changeset
 
   schema "partner" do
-    field :tranding_name, :string
+    field :trading_name, :string
     field :owner_name, :string
     field :document, :string
     field :coverage_area, :map
@@ -14,7 +14,7 @@ defmodule ZeChallengeBackend.Core.Partner do
 
   def changeset(partner, attrs) do
     partner
-    |> cast(attrs, [:tranding_name, :owner_name, :document, :coverage_area, :address])
-    |> validate_required([:tranding_name, :owner_name, :document, :coverage_area, :address])
+    |> cast(attrs, [:trading_name, :owner_name, :document, :coverage_area, :address])
+    |> validate_required([:trading_name, :owner_name, :document, :coverage_area, :address])
   end
 end
