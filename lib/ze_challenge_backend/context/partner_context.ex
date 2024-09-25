@@ -34,38 +34,24 @@ defmodule(ZeChallengeBackend.PartnerContext) do
   end
 
   def update(params) do
-    # {id, _} = params["id"] |> Integer.parse()
-    #
-    # params_parsed = %{
-    #   id: id,
-    #   trading_name: params["tradingName"],
-    #   owner_name: params["ownerName"],
-    #   document: params["document"],
-    #   coverage_area: params["coverageArea"],
-    #   address: params["address"]
-    # }
-    #
-    IO.inspect(params)
+    params = %{
+      id: params["id"],
+      document: params["document"],
+      address: params["address"],
+      coverage_area: params["coverageArea"],
+      owner_name: params["ownerName"],
+      trading_name: params["tradingName"]
+    }
 
-    #Do a way to update jsom to the partners
-    with {:ok, id} <- Validate.get_required(params, "id"),
+    with {:ok, id} <- Validate.get_required(params, :id),
          {:ok, _id} <- Validate.is_integer(id, "id"),
          {:ok, partner} <- Partner.Api.get(id),
-         {:ok, partner} <-
-           {:ok,
-            %{
-              partner
-              | coverage_area: params["coverageArea"],
-                owner_name: params["ownerName"],
-                trading_name: ["tradingName"]
-            }},
-
-    {:ok, updated_partner} <-
-      Partner.Api.update partner, params do
-        {:ok, json!(updated_partner)}
-      else
-        error -> error
-      end
+         {:ok, updated_partner} <-
+           Partner.Api.update(partner, params) do
+      {:ok, json!(updated_partner)}
+    else
+      error -> error
+    end
   end
 
   def delete(params) do

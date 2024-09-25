@@ -10,7 +10,7 @@ defmodule ZeChallengeBackend.Validate do
 
   def is_integer(value, field) do
     case Integer.parse(value) do
-      {num, ""} -> {:ok, num}
+      {num, _} -> {:ok, num}
       _ -> {:error, "the value of \"#{field}\" need been a integer"}
     end
   end

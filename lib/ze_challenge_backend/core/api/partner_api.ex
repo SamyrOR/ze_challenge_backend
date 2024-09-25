@@ -31,4 +31,3 @@ defmodule ZeChallengeBackend.Core.Partner.Api do
     model |> Partner.changeset(params) |> Repo.update()
   end
 end
-
