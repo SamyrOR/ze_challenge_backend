@@ -2,12 +2,12 @@ defmodule ZeChallengeBackend.Core.Partner do
   use Ecto.Schema
   import Ecto.Changeset
 
-  schema "partner" do
+  schema "partners" do
     field :trading_name, :string
     field :owner_name, :string
     field :document, :string
-    field :coverage_area, :map
-    field :address, :map
+    field :coverage_area, Geo.PostGIS.Geometry
+    field :address, Geo.PostGIS.Geometry
 
     timestamps()
   end

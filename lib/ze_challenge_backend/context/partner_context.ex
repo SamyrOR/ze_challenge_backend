@@ -18,6 +18,17 @@ defmodule(ZeChallengeBackend.PartnerContext) do
     end
   end
 
+  def get_nearest(coordinates) do
+    IO.inspect(Geo.JSON.decode(coordinates))
+
+    with {:ok, coordinates} <- Geo.JSON.decode(coordinates),
+         {:ok, partner} <- Partner.Api.get_nearest(coordinates) do
+      {:ok, json!(partner)}
+    else
+      error -> error
+    end
+  end
+
   def create(params) do
     params_parsed = %{
       trading_name: params["tradingName"],
